@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import { NavigationItem } from "./navigation-item";
-import { HomeIcon } from "~/components/icons";
+import { HomeIcon } from "~/components/elements/icons";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon },
@@ -46,13 +46,7 @@ export const Navigation = component$(() => {
           </ul>
         </li>
         <li class="mt-auto">
-          <a
-            href="#"
-            class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
-          >
-            <HomeIcon class="h-6 w-6 shrink-0" aria-hidden="true" />
-            Settings
-          </a>
+          <NavigationItem href="/profile" name="Settings" />
         </li>
       </ul>
     </nav>

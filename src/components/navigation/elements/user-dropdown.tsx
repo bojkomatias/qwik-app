@@ -1,20 +1,26 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import clsx from "clsx";
 import { NavigationItem } from "./navigation-item";
-import { ChevronDown } from "~/components/icons";
+import { ChevronDown } from "~/components/elements/icons";
+import { Button } from "~/components/elements/button";
 
 // export interface UserDropdownProps {
 //   user: string[];
 // }
 
 export const UserDropdown = component$(() => {
-  const open = useSignal(true);
+  const open = useSignal(false);
   return (
-    <div class="relative">
-      <button
-        onClick$={() => (open.value = !open.value)}
+    <div
+      class="relative"
+      onClick$={() => (open.value = !open.value)}
+      document:onKeyDown$={(e) => {
+        if (e.key === "Escape") open.value = false;
+      }}
+    >
+      <Button
+        var="basic"
         type="button"
-        class="-m-1.5 flex items-center p-1.5"
         id="user-menu-button"
         aria-expanded="false"
         aria-haspopup="true"
@@ -26,23 +32,26 @@ export const UserDropdown = component$(() => {
           alt=""
         />
         <span class="hidden lg:flex lg:items-center">
-          <span class="ml-4 text-sm font-semibold leading-6" aria-hidden="true">
-            Tom Cook
+          <span
+            class="ml-4 text-sm font-semibold leading-6 text-white"
+            aria-hidden="true"
+          >
+            Matías Bojko
           </span>
           <ChevronDown />
         </span>
-      </button>
+      </Button>
       <div
         class={clsx(
-          "absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded border bg-gray-900 py-2 shadow-lg focus:outline-none transition",
+          "absolute right-0 z-10 mt-2.5 w-40 origin-top-right rounded border border-gray-500/20 bg-main-950 py-2 shadow-lg transition focus:outline-none",
           {
-            "opacity-100": !open.value,
-            "opacity-0": open.value,
+            "opacity-100": open.value,
+            "opacity-0": !open.value,
           }
         )}
       >
-        <NavigationItem href="#" name="Profile" />
-        <NavigationItem href="#" name="Sign out" />
+        <NavigationItem href="/profile" name="Profile" />
+        <NavigationItem href="/login" name="Sign out" />
       </div>
     </div>
   );

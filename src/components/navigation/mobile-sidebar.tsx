@@ -8,19 +8,16 @@ export interface MobileSidebarProps {
 
 export const MobileSidebar = component$<MobileSidebarProps>((props) => {
   return (
-    <div class="relative z-50 lg:hidden" role="dialog" aria-modal="true">
-      {/* <!--
-    Off-canvas menu backdrop, show/hide based on off-canvas menu state.
-
-    Entering: "transition-opacity ease-linear duration-300"
-      From: "opacity-0"
-      To: "opacity-100"
-    Leaving: "transition-opacity ease-linear duration-300"
-      From: "opacity-100"
-      To: "opacity-0"
-  --> */}
+    <div
+      class="relative z-50 lg:hidden"
+      role="dialog"
+      aria-modal="true"
+      window:onKeyDown$={(e) => {
+        if (e.key === "Escape") props.open.value = false;
+      }}
+    >
       <div
-        class={clsx("fixed inset-0 bg-gray-900/80", {
+        class={clsx("fixed inset-0 bg-black/50 backdrop-blur", {
           hidden: !props.open.value,
         })}
       />
@@ -69,11 +66,18 @@ export const MobileSidebar = component$<MobileSidebarProps>((props) => {
           </div>
 
           {/* <!-- Sidebar component, swap this element with another sidebar if you like --> */}
-          <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10">
+          <div
+            class="flex grow flex-col gap-y-5 overflow-y-auto bg-main-950 px-6 pb-4 text-white"
+            onClick$={() =>
+              setTimeout(() => {
+                props.open.value = false;
+              }, 50)
+            }
+          >
             <div class="flex h-16 shrink-0 items-center">
               <img
                 class="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=pink&shade=700"
+                src="https://tailwindui.com/img/logos/mark.svg?color=cyan&shade=700"
                 alt="Your Company"
               />
             </div>

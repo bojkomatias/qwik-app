@@ -1,7 +1,7 @@
 import { component$, type Component } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import clsx from "clsx";
-import { type IconProps } from "~/components/icons";
+import { type IconProps } from "~/components/elements/icons";
 
 export interface NavigationItemProps {
   href: string;
@@ -16,15 +16,15 @@ export const NavigationItem = component$<NavigationItemProps>((props) => {
       href={props.href}
       class={clsx(
         url.pathname === props.href
-          ? "bg-gray-800 text-white"
-          : "text-gray-300 hover:text-white hover:bg-gray-800",
-        "group flex gap-x-3 rounded p-2 mx-0.5 text-sm leading-6 font-semibold"
+          ? "bg-main-900"
+          : "text-gray-200 hover:bg-main-900 hover:text-inherit",
+        "group mx-0.5 flex gap-x-3 rounded p-2 text-sm font-semibold leading-6"
       )}
     >
       {props.icon ? (
         <props.icon aria-hidden="true" />
       ) : (
-        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded border bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">
+        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded border border-main-800 bg-main-900 text-[0.625rem] font-medium text-gray-400 group-hover:bg-main-950 group-hover:text-inherit">
           {props.name.substring(0, 1)}
         </span>
       )}

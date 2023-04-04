@@ -6,14 +6,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lil hack to force ring offset be automatic */
+
 @layer base {
   a {
-    @apply focus:outline-none focus:ring;
+    @apply focus:outline-none focus:ring focus:ring-offset-main-950;
   }
   label {
-    @apply block text-sm font-medium leading-6 select-none;
+    @apply mb-1 block select-none text-sm font-medium leading-6 first-letter:capitalize;
   }
   input {
-    @apply form-input bg-white/5 block w-full rounded border-0 py-1.5 pr-14 shadow-sm ring focus:ring-2 focus:ring-offset-2 focus:ring-offset-inherit placeholder:text-gray-400 placeholder:font-thin focus:ring-pink-600 sm:text-sm sm:leading-6;
+    @apply input form-input;
+  }
+  input[type="checkbox"] {
+    @apply form-checkbox rounded-sm border-0 bg-gray-500/5 text-main-700 focus:ring-2 focus:ring-main-700 dark:ring-offset-gray-900 dark:focus:ring-offset-gray-900;
+  }
+  input[type="radio"] {
+    @apply form-radio rounded border-0 bg-gray-500/5 text-main-700 focus:ring-2 focus:ring-main-700 dark:ring-offset-gray-900 dark:focus:ring-offset-gray-900;
+  }
+  textarea {
+    @apply input form-textarea;
+  }
+  select {
+    @apply input form-select;
+  }
+}
+
+@layer components {
+  .input {
+    @apply block w-full rounded border-0 bg-gray-500/5 py-1.5 pr-14 shadow-sm ring ring-gray-500/10 placeholder:font-light placeholder:text-gray-500 focus:ring-2 focus:ring-main-700 focus:ring-offset-2 dark:ring-offset-gray-900 dark:focus:ring-offset-gray-900 sm:text-sm sm:leading-6;
+  }
+  .error {
+    @apply ml-1 text-xs font-medium text-red-500 drop-shadow;
   }
 }
