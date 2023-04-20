@@ -1,19 +1,17 @@
 import { component$ } from "@builder.io/qwik";
 import { NavigationItem } from "./navigation-item";
-import { HomeIcon } from "~/components/elements/icons";
+import * as Icons from "lucide-qwik";
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: HomeIcon },
-  { name: "Team", href: "/users/" },
-  { name: "Projects", href: "#" },
-  { name: "Calendar", href: "/calendar/" },
-  { name: "Documents", href: "#" },
-  { name: "Reports", href: "#" },
+  { name: "Dashboard", href: "/", icon: Icons.HomeIcon },
+  { name: "Team", href: "/users/", icon: Icons.UsersIcon },
+  { name: "Projects", href: "/this", icon: Icons.FileTerminalIcon },
+  { name: "Calendar", href: "#", icon: Icons.CalendarCheckIcon },
+  { name: "Documents", href: "#", icon: Icons.ArchiveIcon },
 ];
 const teams = [
-  { id: 1, name: "Heroicons", href: "#" },
-  { id: 2, name: "Tailwind Labs", href: "#" },
-  { id: 3, name: "Workcation", href: "#" },
+  { id: 1, name: "pqlub", href: "#" },
+  { id: 2, name: "bojkomatias", href: "#" },
 ];
 
 export const Navigation = component$(() => {
@@ -44,9 +42,6 @@ export const Navigation = component$(() => {
               </li>
             ))}
           </ul>
-        </li>
-        <li class="mt-auto">
-          <NavigationItem href="/profile" name="Settings" />
         </li>
       </ul>
     </nav>

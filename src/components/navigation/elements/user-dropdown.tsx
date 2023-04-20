@@ -4,12 +4,9 @@ import { NavigationItem } from "./navigation-item";
 import { ChevronDown } from "~/components/elements/icons";
 import { Button } from "~/components/elements/button";
 
-// export interface UserDropdownProps {
-//   user: string[];
-// }
-
 export const UserDropdown = component$(() => {
   const open = useSignal(false);
+
   return (
     <div
       class="relative"
@@ -19,7 +16,6 @@ export const UserDropdown = component$(() => {
       }}
     >
       <Button
-        var="basic"
         type="button"
         id="user-menu-button"
         aria-expanded="false"

@@ -1,12 +1,10 @@
 import { component$ } from "@builder.io/qwik";
-import { Form, useNavigate } from "@builder.io/qwik-city";
-import { useSignIn } from "~/routes/login/index@unauthorized";
+import { Form } from "@builder.io/qwik-city";
 import { Button } from "../elements/button";
+import { useAuthSignin } from "~/routes/plugin@auth";
 
 export const SignInForm = component$(() => {
-  const push = useNavigate();
-  const action = useSignIn();
-  if (!action.value?.failed) push("/");
+  const action = useAuthSignin();
 
   return (
     <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -14,24 +12,16 @@ export const SignInForm = component$(() => {
         <Form class="space-y-3" action={action}>
           <div>
             <label for="email">Email</label>
-            <input
-              name="email"
-              type="text"
-              value={action.formData?.get("email")}
-            />
-            <span class={"error"}>{action.value?.fieldErrors?.email}</span>
+            <input name="email" type="text" />
+            {/* <span class={"error"}>{action.value?.fieldErrors?.}</span> */}
           </div>
           <div>
             <label for="password">Password</label>
-            <input
-              name="password"
-              type="password"
-              value={action.formData?.get("password")}
-            />
-            <span class={"error"}>{action.value?.fieldErrors?.password}</span>
+            <input name="password" type="password" />
+            {/* <span class={"error"}>{action.value?.fieldErrors?.password}</span> */}
           </div>
-          {!action.value?.success && (
-            <span class={"error"}>{action.value?.message}</span>
+          {!action.value?.failed && (
+            <span class={"error"}>{action.value?.formErrors}</span>
           )}
           <div>
             <Button var="main" type="submit" class="w-full">

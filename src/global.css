@@ -10,7 +10,10 @@
 
 @layer base {
   a {
-    @apply focus:outline-none focus:ring focus:ring-offset-main-950;
+    @apply outline-2 outline-offset-2 outline-gray-500/50 focus-visible:outline;
+  }
+  button {
+    @apply outline-2 outline-offset-2 outline-gray-500/50 focus-visible:outline;
   }
   label {
     @apply mb-1 block select-none text-sm font-medium leading-6 first-letter:capitalize;
@@ -34,7 +37,7 @@
 
 @layer components {
   .input {
-    @apply block w-full rounded border-0 bg-gray-500/5 py-1.5 pr-14 shadow-sm ring ring-gray-500/10 placeholder:font-light placeholder:text-gray-500 focus:ring-2 focus:ring-main-700 focus:ring-offset-2 dark:ring-offset-gray-900 dark:focus:ring-offset-gray-900 sm:text-sm sm:leading-6;
+    @apply block w-full rounded border-0 bg-gray-500/5 py-1.5 pr-14 shadow-sm outline outline-offset-2 outline-gray-500/10 placeholder:font-light placeholder:text-gray-500 focus:ring-2 focus:ring-main-700 sm:text-sm sm:leading-6;
   }
   .error {
     @apply ml-1 text-xs font-medium text-red-500 drop-shadow;

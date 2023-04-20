@@ -28,14 +28,17 @@ export const MobileSidebar = component$<MobileSidebarProps>((props) => {
         })}
       >
         <div
-          class={clsx("relative mr-16 flex w-full max-w-xs flex-1 transition", {
-            "-translate-x-full": !props.open.value,
-            "translate-x-0": props.open.value,
-          })}
+          class={clsx(
+            "relative mr-16 flex w-full max-w-xs flex-1 transition duration-500 ease-in-out",
+            {
+              "-translate-x-full": !props.open.value,
+              "translate-x-0": props.open.value,
+            }
+          )}
         >
           <div
             class={clsx(
-              "absolute left-full top-0 flex w-16 justify-center pt-5 transition",
+              "absolute left-full top-0 flex w-16 justify-center pt-5 transition duration-500 ease-in-out",
               {
                 "opacity-0": !props.open.value,
                 "opacity-100": props.open.value,
@@ -67,7 +70,7 @@ export const MobileSidebar = component$<MobileSidebarProps>((props) => {
 
           {/* <!-- Sidebar component, swap this element with another sidebar if you like --> */}
           <div
-            class="flex grow flex-col gap-y-5 overflow-y-auto bg-main-950 px-6 pb-4 text-white"
+            class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 px-6 pb-4"
             onClick$={() =>
               setTimeout(() => {
                 props.open.value = false;

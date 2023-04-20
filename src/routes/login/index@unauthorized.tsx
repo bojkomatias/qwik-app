@@ -1,15 +1,13 @@
 import { component$ } from "@builder.io/qwik";
-import { routeAction$, z, zod$ } from "@builder.io/qwik-city";
-import { SignInForm } from "~/components/auth/sign-in-form";
-
-export const useSignIn = routeAction$(({ email, password }) => {
-  if (email === "admin@admin.com" && password === "admin123") {
-    return { success: true };
-  }
-  return { success: false, message: "Credentials don't match" };
-}, zod$({ email: z.string().min(5), password: z.string().min(8) }));
+import { Form } from "@builder.io/qwik-city";
+import { useAuthSession, useAuthSignin, useAuthSignout } from "../plugin@auth";
 
 export default component$(() => {
+  const signOut = useAuthSignout();
+  const loginForm = useAuthSignin();
+
+  const session = useAuthSession();
+
   return (
     <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
@@ -31,7 +29,23 @@ export default component$(() => {
           </a>
         </p>
       </div>
-      <SignInForm />
+
+      {session.value ? (
+        <Form action={signOut}>
+          <button type="submit">Sign Out</button>
+          <pre>{JSON.stringify(signOut.isRunning, null, 2)}</pre>
+          <pre>{JSON.stringify(signOut.value, null, 2)}</pre>
+        </Form>
+      ) : (
+        <Form action={loginForm}>
+          <input type="hidden" name="provider" value="github" />
+          <button type="submit">Sign In</button>
+          <pre>{JSON.stringify(signOut.isRunning, null, 2)}</pre>
+          <pre>{JSON.stringify(signOut.value, null, 2)}</pre>
+        </Form>
+      )}
+
+      {/* <SignInForm /> */}
     </div>
   );
 });

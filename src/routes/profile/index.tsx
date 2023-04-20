@@ -1,14 +1,14 @@
 import { component$ } from "@builder.io/qwik";
+import type { Loader } from "@builder.io/qwik-city";
 import { Form, routeAction$, routeLoader$ } from "@builder.io/qwik-city";
 import { Button } from "~/components/elements/button";
 
-export const useProfile = routeLoader$(async () => {
-  const res = await fetch("https://dummyjson.com/users/1");
+export const useProfile: Loader<User> = routeLoader$(async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users/1");
   return res.json();
 });
 
 export const useProfileAction = routeAction$((profile) => {
-  // upsert profile
   console.log("Action executed", profile);
   return { success: true };
 });
@@ -29,18 +29,18 @@ export default component$(() => {
           </div>
 
           <Form
-            class="border border-gray-500/20 sm:rounded-xl md:col-span-2"
+            class="border border-gray-500/20 bg-gray-50 dark:bg-gray-900 sm:rounded-xl md:col-span-2"
             action={action}
           >
             <div class="px-4 py-6 sm:p-8">
               <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                 <div class="sm:col-span-4">
-                  <label for="domain">Website</label>
+                  <label for="website">Website</label>
                   <input
                     type="text"
-                    name="domain"
-                    id="domain"
-                    value={profile.domain}
+                    name="website"
+                    id="website"
+                    value={profile.website}
                     placeholder="www.example.com"
                   />
                 </div>
@@ -60,6 +60,15 @@ export default component$(() => {
                   <div class="mt-2 flex items-center gap-x-3">
                     {/* <UserCircleIcon class="h-12 w-12 text-gray-300" aria-hidden="true" /> */}
                     <Button type="button">Change</Button>
+                    <Button var="light" type="button">
+                      Change
+                    </Button>
+                    <Button var="outline" type="button">
+                      Change
+                    </Button>
+                    <Button var="main" type="button">
+                      Change
+                    </Button>
                   </div>
                 </div>
 
