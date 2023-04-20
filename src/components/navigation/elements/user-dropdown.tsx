@@ -1,8 +1,9 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import clsx from "clsx";
 import { NavigationItem } from "./navigation-item";
-import { ChevronDown } from "~/components/elements/icons";
+
 import { Button } from "~/components/elements/button";
+import { ChevronDownIcon } from "lucide-qwik";
 
 export const UserDropdown = component$(() => {
   const open = useSignal(false);
@@ -34,7 +35,7 @@ export const UserDropdown = component$(() => {
           >
             Matías Bojko
           </span>
-          <ChevronDown />
+          <ChevronDownIcon />
         </span>
       </Button>
       <div
